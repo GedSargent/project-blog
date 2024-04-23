@@ -3,11 +3,19 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
 
-async function BlogPost({ params }) {
+export async function generateMetadata({ params }) {
   const { postSlug } = params;
   const post = await loadBlogPost(postSlug);
 
-  console.log({ post });
+  return {
+    title: post.frontmatter.title,
+    description: post.frontmatter.abstract,
+  };
+}
+
+async function BlogPost({ params }) {
+  const { postSlug } = params;
+  const post = await loadBlogPost(postSlug);
 
   return (
     <article className={styles.wrapper}>
