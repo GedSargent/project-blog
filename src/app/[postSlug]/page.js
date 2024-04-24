@@ -11,6 +11,11 @@ const DivisionGroupsDemo = dynamic(
   { loading: Spinner }
 );
 
+const CircularColorsDemo = dynamic(
+  () => import("@/components/CircularColorsDemo"),
+  { loading: Spinner }
+);
+
 export async function generateMetadata({ params }) {
   const { postSlug } = params;
   const post = await loadBlogPost(postSlug);
@@ -35,7 +40,11 @@ async function BlogPost({ params }) {
         {
           <MDXRemote
             source={post.content}
-            components={{ pre: CodeSnippet, DivisionGroupsDemo }}
+            components={{
+              pre: CodeSnippet,
+              DivisionGroupsDemo,
+              CircularColorsDemo,
+            }}
           />
         }
       </div>
